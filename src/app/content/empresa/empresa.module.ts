@@ -11,6 +11,7 @@ import { SalariosEmpresaComponent } from './empresa-detalhe/salarios-empresa/sal
 import { VagasEmpresaComponent } from './empresa-detalhe/vagas-empresa/vagas-empresa.component';
 import { CadastroModule } from '../cadastro/cadastro.module';
 import { AvaliacaoCardComponent } from './empresa-detalhe/avaliacoes-empresa/avaliacao-card/avaliacao-card.component';
+import { VagasModule } from '../vagas/vagas.module';
 
 
 
@@ -29,7 +30,8 @@ import { AvaliacaoCardComponent } from './empresa-detalhe/avaliacoes-empresa/ava
     CommonModule,
     PrimengModule,
     ReactiveFormsModule,
-    CadastroModule
+    CadastroModule,
+    VagasModule
   ],
   exports: [
     DetalheListEmpresaComponent

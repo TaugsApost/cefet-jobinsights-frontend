@@ -1,1 +1,25 @@
-<p>vagas-empresa works!</p>
+<div class="w-full grid m-0 p-0 align-items-center h-full mt-3">
+    <div *ngIf="vagas.length === 0" class="col-11">
+        <p-card class="border-noround opacity-90" header="Vagas">
+            <div class="col-12 h-30rem grid align-items-center">
+                <div class="formgrid grid mt-3 col-12 justify-content-center align-items-center text-center">
+                    <div class="col-12 field">
+                        <span class="text-xl">
+                            No momento esta empresa não possui vagas cadastradas
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div *ngIf="vagas.length > 0" class="col-11">
+        <p-card class="border-noround opacity-90" header="Vagas">
+            <div class="formgrid grid mt-3 col-12">
+                <div class="col-12 field">
+                    <app-lista-vagas [vagas]="vagas"></app-lista-vagas>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

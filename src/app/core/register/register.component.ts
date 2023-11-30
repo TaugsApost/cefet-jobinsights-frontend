@@ -55,6 +55,8 @@ export class RegisterComponent {
       idCurso: new FormControl(null, Validators.required),
       anoIngresso: new FormControl(null),
       anoFormatura: new FormControl(null),
+      cargo: new FormControl(),
+      curso: new FormControl(),
       //
       novoCargo: new FormControl(''),
       novoCurso: new FormControl('')
@@ -229,9 +231,11 @@ export class RegisterComponent {
     }
     if (this.form.get('idCargo')?.value === -1 && this.form.get('novoCargo')?.valid) {
       const cargo: Cargo = { id: 0, nome: this.form.get('novoCargo')?.value };
+      this.form.get('cargo')?.setValue(cargo);
     }
     if (this.form.get('idCurso')?.value === -1 && this.form.get('novoCurso')?.valid) {
       const curso: Curso = { id: 0, nome: this.form.get('novoCurso')?.value }
+      this.form.get('curso')?.setValue(curso);
     }
   }
 

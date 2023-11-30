@@ -10,10 +10,6 @@ export const ITEMS_MENU: MenuItem[] = [
         routerLink: '/carreira/empresas'
     },
     {
-        label: 'Salários',
-        routerLink: '/carreira/salarios'
-    },
-    {
         label: 'Para Empresas',
         routerLink: '/para-empresas'
     },
