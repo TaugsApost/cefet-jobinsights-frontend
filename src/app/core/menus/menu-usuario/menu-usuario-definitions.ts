@@ -56,7 +56,10 @@ export const ITEM_LOGOUT: ItemMenuUsuario = {
 export const ITEM_PERFIL: ItemMenuUsuario = {
     isNavegate: false,
     label: 'Perfil',
-    showIcon: true
+    showIcon: true,
+    navegate: (router: Router) => {
+        router.navigateByUrl("/carreira/perfil");
+    }
 };
 
 export const ITEM_CONTRIBUICOES: ItemMenuUsuario = {
@@ -74,8 +77,6 @@ export const ITEM_VAGAS: ItemMenuUsuario = {
 export const MENU_USUARIO_LOGADO: MenuUsuario = {
     itens: [
         ITEM_PERFIL,
-        ITEM_CONTRIBUICOES,
-        ITEM_VAGAS,
         ITEM_LOGOUT
     ]
 };

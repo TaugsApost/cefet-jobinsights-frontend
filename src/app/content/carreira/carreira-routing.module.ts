@@ -4,6 +4,7 @@ import { EmpresaDetalheComponent } from "../empresa/empresa-detalhe/empresa-deta
 import { EmpresaComponent } from "../empresa/empresa.component";
 import { VagasComponent } from "./vagas/vagas.component";
 import { CarreiraComponent } from "./carreira.component";
+import { PerfilComponent } from "./perfil/perfil.component";
 
 const routes: Routes = [
     {
@@ -21,6 +22,10 @@ const routes: Routes = [
             {
                 path: 'empresas/detalhe',
                 component: EmpresaDetalheComponent
+            },
+            {
+                path: 'perfil',
+                component: PerfilComponent
             },
             {
                 path: '',

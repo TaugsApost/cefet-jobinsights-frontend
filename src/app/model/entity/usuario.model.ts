@@ -18,5 +18,6 @@ export class Aluno extends Usuario {
     curso: Curso = new Curso();
     anoIngresso: Date = new Date();
     anoFormatura: Date = new Date();
+    listaVagasCandidatadas: any;
 }
 

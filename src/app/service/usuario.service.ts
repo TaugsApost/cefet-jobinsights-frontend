@@ -32,4 +32,9 @@ export class UsuarioService extends AbstractComponentService<Usuario> {
         return this.http.post<Empresa>(url, entity);
     }
 
+    editarAluno(entity: Aluno): Observable<Aluno> {
+        const url = this.urlApi + this.path + AppConfig.settings.endpoints.editar + "/aluno";
+        return this.http.post<Aluno>(url, entity);
+    }
+
 }

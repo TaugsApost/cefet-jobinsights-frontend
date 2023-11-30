@@ -1,0 +1,138 @@
+<div class="w-full grid m-0 p-0 align-items-center justify-content-center h-full mt-3">
+    <form [formGroup]="form" class="w-11">
+        <p-card class="border-noround opacity-90" header="Perfil">
+            <p-fieldset [legend]="'Dados do Aluno'" [toggleable]="true">
+                <div class="formgrid grid col-12 mt-2">
+                    <div class="col-12 field">
+                        <span class="p-float-label">
+                            <input type="text" pInputText class="p-inputtext-sm" formControlName="nome" readonly
+                                style="cursor: not-allowed;">
+                            <label for="">Nome</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="formgrid mt-3 grid col-12">
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <input type="text" pInputText class="p-inputtext-sm" formControlName="email">
+                            <label for="">Email</label>
+                        </span>
+                    </div>
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-inputMask styleClass="w-full p-inputtext-sm" formControlName="telefone"
+                                [mask]="'(99) 9999-9999'">
+                            </p-inputMask>
+                            <label for="">Telefone</label>
+                        </span>
+                    </div>
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-inputMask styleClass="w-full p-inputtext-sm" formControlName="celular"
+                                [mask]="'(99) 9 9999-9999'">
+                            </p-inputMask>
+                            <label for="">Celular</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="formgrid  mt-3 grid col-12">
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <input type="text" pInputText class="p-inputtext-sm" readonly formControlName="login"
+                                style="cursor: not-allowed;">
+                            <label for="">Login</label>
+                        </span>
+                    </div>
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-password [toggleMask]="true" styleClass="w-full p-inputtext-sm p-input-icon-right"
+                                formControlName="novaSenha" promptLabel="Digite sua senha" weakLabel="Fraca"
+                                mediumLabel="Média" strongLabel="Forte">
+                                <ng-template pTemplate="footer">
+                                    <p-divider></p-divider>
+                                    <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                        <li *ngFor="let validador of senhaValidators"
+                                            [style]="{'color' : validarSenha(validador)}">
+                                            {{validador.label}}
+                                        </li>
+                                    </ul>
+                                </ng-template>
+                            </p-password>
+                            <label>Senha</label>
+                        </span>
+                    </div>
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-password [toggleMask]="true" styleClass="w-full p-inputtext-sm p-input-icon-right"
+                                [feedback]="false" formControlName="confirmarSenha">
+                            </p-password>
+                            <label>Confirme a nova senha</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="formgrid  mt-3 grid col-12">
+                    <div class="col-5 field">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaCargos" [placeholder]="'Cargo exercido'"
+                                styleClass="p-inputtext-sm" inputId="dropdown" formControlName="idCargo" [filter]="true"
+                                [showClear]="true" (onChange)="onChangeCargo($event)">
+                            </p-dropdown>
+                            <label>Cargo</label>
+                        </span>
+                    </div>
+                    <div *ngIf="outroCargo" class="col-5 field">
+                        <span class="p-float-label">
+                            <input type="text" pInputText class="p-inputtext-sm" formControlName="novoCargo">
+                            <label for="">Digite o nome do seu cargo *</label>
+                        </span>
+                    </div>
+                </div>
+            </p-fieldset>
+            <p-fieldset styleClass="mt-4" [legend]="'Dados Acadêmicos'" [toggleable]="true">
+                <div class="formgrid mt-3 grid col-12">
+                    <div class="col-5 field">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="listaCursos" [placeholder]="'Graduação'" styleClass="p-inputtext-sm"
+                                inputId="dropdown" formControlName="idCurso" [filter]="true" [showClear]="true"
+                                (onChange)="onChangeCurso($event)">
+                            </p-dropdown>
+                            <label>Curso</label>
+                        </span>
+                    </div>
+                    <div *ngIf="outroCurso" class="col-5 field">
+                        <span class="p-float-label">
+                            <input type="text" pInputText class="p-inputtext-sm" formControlName="novoCurso">
+                            <label for="">Digite o nome da sua graduação *</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="formgrid mt-3 grid col-12">
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-calendar styleClass="p-inputtext-sm w-full" view="month" dateFormat="mm/yy"
+                                formControlName="anoIngresso">
+                            </p-calendar>
+                            <label for="">Data de ingresso</label>
+                        </span>
+                    </div>
+                    <div class="col-4 field">
+                        <span class="p-float-label">
+                            <p-calendar styleClass="p-inputtext-sm w-full" view="month" dateFormat="mm/yy"
+                                formControlName="anoFormatura">
+                            </p-calendar>
+                            <label for="">Data de conclusão</label>
+                        </span>
+                    </div>
+                </div>
+            </p-fieldset>
+            <div class="col-12 formgrid grid flex justify-content-end mt-4 mb-0">
+                <div class="col-2 field mb-0">
+                    <button pButton class="p-button-raised p-button-sm" [style]="{'width':'100%'}" label="Salvar"
+                        (click)="salvar()">
+                    </button>
+                </div>
+
+            </div>
+        </p-card>
+    </form>
+</div>
