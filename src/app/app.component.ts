@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationError, Router } from '@angular/router';
 import { BackgroundService } from './infra/background/background.service';
+import { LoaderService } from './infra/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,15 @@ export class AppComponent {
   bgImage = '../assets/imagens/background/background.png';
 
   canShowMenu: boolean = true;
+  loadService: LoaderService;
 
-  constructor(private readonly router: Router, bgService: BackgroundService, private route: ActivatedRoute) {
+  constructor(
+    private readonly router: Router,
+    bgService: BackgroundService,
+    private route: ActivatedRoute,
+    private _loadService: LoaderService
+  ) {
+    this.loadService = _loadService;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.bgImage = bgService.getBackgroudByUrl(router.url);

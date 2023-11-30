@@ -51,11 +51,16 @@ export class AvaliacaoComponent {
   salvar() {
     if (this.form.valid) {
       const avaliacao: Avaliacao = this.form.getRawValue() as Avaliacao;
-      this.avaliacaoService.salvar(avaliacao).subscribe(response => {
-        this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Avaliação salva com sucesso").then(value => {
-          this.display = false;
-          this.avaliacaoSalva.emit();
-        })
+      this.mensagemService.mostrarMensagemSimNao("Cadastro", "Deseja prosegguir com a operação?").then(value => {
+        if (value) {
+          this.avaliacaoService.salvar(avaliacao).subscribe(response => {
+            this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Avaliação salva com sucesso").then(value => {
+              this.display = false;
+              this.avaliacaoSalva.emit();
+            })
+
+          })
+        }
       })
     }
   }

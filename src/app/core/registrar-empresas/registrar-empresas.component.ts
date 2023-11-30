@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import { MensagensService } from 'src/app/infra/mensagens/mensagens.service';
 import { Empresa } from 'src/app/model/entity/empresa.model';
 import { Setor } from 'src/app/model/entity/setor.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar-empresas',
@@ -25,7 +26,8 @@ export class RegistrarEmpresasComponent {
   constructor(
     private readonly setorService: SetorService,
     private readonly usuarioService: UsuarioService,
-    private readonly mensagemService: MensagensService
+    private readonly mensagemService: MensagensService,
+    private readonly router: Router
   ) {
     this.form = new FormGroup({
       login: new FormControl('', Validators.required),
@@ -160,11 +162,21 @@ export class RegistrarEmpresasComponent {
     this.beforeSave();
     if (this.form.valid) {
       let empresa: Empresa = this.form.getRawValue() as Empresa;
-      this.usuarioService.salvarEmpresa(empresa).subscribe(empresa => {
-        this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Usuário criado com sucesso").then(value => {
-          //this.navegar();
-        })
-      })
+
+      this.mensagemService.mostrarMensagemSimNao("Cadastro", "Você irá criar uma conta no JobInsights. Deseja prosseguir?").then(value => {
+        if (value) {
+          this.usuarioService.salvarEmpresa(empresa).subscribe(empresa => {
+            this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Usuário criado com sucesso").then(value => {
+              this.navegar();
+            })
+          }, erro => {
+            this.mensagemService.mostrarMensagemComRetorno("Falha", erro.error).then(value => {
+
+            })
+          })
+        }
+      });
+
     } else {
       this.mensagemService.mostrarMensagemComRetorno("Erro", "Preencha o formulario corretamente").then(value => {
 
@@ -179,5 +191,7 @@ export class RegistrarEmpresasComponent {
       this.form.get('setor')?.setValue(setor);
     }
   }
-
+  navegar() {
+    this.router.navigateByUrl('/login');
+  }
 }

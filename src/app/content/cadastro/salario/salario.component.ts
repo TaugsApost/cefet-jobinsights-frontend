@@ -63,11 +63,15 @@ export class SalarioComponent {
   salvar() {
     if (this.form.valid) {
       const salario: Salario = this.form.getRawValue() as Salario;
-      this.salarioService.salvar(salario).subscribe(response => {
-        this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Salário salvo com sucesso").then(value => {
-          this.display = false;
-          this.salarioSalvo.emit();
-        })
+      this.mensagemService.mostrarMensagemSimNao("Cadastro", "Deseja prosseguir com a operação?").then(value => {
+        if (value) {
+          this.salarioService.salvar(salario).subscribe(response => {
+            this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Salário salvo com sucesso").then(value => {
+              this.display = false;
+              this.salarioSalvo.emit();
+            })
+          })
+        }
       })
     }
   }

@@ -187,10 +187,18 @@ export class RegisterComponent {
     this.beforeSave();
     if (this.form.valid) {
       let aluno: Aluno = this.form.getRawValue() as Aluno;
-      this.usuarioService.salvarAluno(aluno).subscribe(aluno => {
-        this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Usuário criado com sucesso").then(value => {
-          this.navegar();
-        })
+      this.mensagemService.mostrarMensagemSimNao("Cadastro", "Você irá criar uma conta no JobInsights. Deseja prosseguir?").then(value => {
+        if (value) {
+          this.usuarioService.salvarAluno(aluno).subscribe(aluno => {
+            this.mensagemService.mostrarMensagemComRetorno("Sucesso", "Usuário criado com sucesso").then(value => {
+              this.navegar();
+            })
+          }, erro => {
+            this.mensagemService.mostrarMensagemComRetorno("Falha", erro.error).then(value => {
+
+            })
+          })
+        }
       })
     } else {
       this.mensagemService.mostrarMensagemComRetorno("Erro", "Preencha o formulario corretamente").then(value => {

@@ -1,0 +1,48 @@
+.loader-hidden {
+    visibility: hidden;
+}
+
+.loader-up {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    z-index: 9999999;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes ui-progress-spinner-color {
+
+    100%,
+    0% {
+        stroke: #0057e7;
+    }
+
+    40% {
+        stroke: #0057e7;
+    }
+
+    66% {
+        stroke: #0057e7;
+    }
+
+    80%,
+    90% {
+        stroke: #0057e7;
+    }
+}
