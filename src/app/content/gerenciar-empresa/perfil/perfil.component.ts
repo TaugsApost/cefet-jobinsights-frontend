@@ -193,9 +193,11 @@ export class PerfilComponent implements OnInit {
               this.form.get('novoSetor')?.reset();
               this.outroSetor = false;
               this.form.get('novaSenha')?.setValue("");
-              this.form.get('novaSenha')?.clearAsyncValidators();
+              this.form.get('novaSenha')?.clearValidators();
               this.form.get('confirmarSenha')?.setValue("");
-              this.form.get('confirmarSenha')?.clearAsyncValidators();
+              this.form.get('confirmarSenha')?.clearValidators();
+              this.form.get('novaSenha')?.updateValueAndValidity();
+              this.form.get('confirmarSenha')?.updateValueAndValidity();
               this.form.patchValue(empresa);
             })
           });
